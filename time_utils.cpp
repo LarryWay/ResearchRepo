@@ -4,6 +4,10 @@
 #include <chrono>
 #include <functional>
 
+
+const int AVERAGE_REPEAT_AMOUNT = 5;
+
+
 double time_nano(std::function<void()> f){
     auto start = std::chrono::high_resolution_clock::now();
     f();
@@ -47,14 +51,13 @@ template <typename T>
 T avg_time_iter(int iterations, std::function<void()> f){
 
     T sum = T::zero();
-    const int REPEAT = 20;
 
-    for(int x = 0 ; x < REPEAT ; x++){
+    for(int x = 0 ; x < AVERAGE_REPEAT_AMOUNT ; x++){
         sum += time_iter<T>(iterations, f);
         //std::cout << sum.count() << std::endl;
     }
 
-    sum = sum / REPEAT;
+    sum = sum / AVERAGE_REPEAT_AMOUNT;
     return sum;
 
 }
@@ -62,12 +65,11 @@ T avg_time_iter(int iterations, std::function<void()> f){
 template <typename T>
 T avg_time(std::function<void()> f){
     T sum = T::zero();
-    const int REPEAT = 20;
 
-    for(int x = 0 ; x < REPEAT ; x++){
+    for(int x = 0 ; x < AVERAGE_REPEAT_AMOUNT ; x++){
         sum += time<T>(f);
     }
 
-    sum /= REPEAT;
+    sum /= AVERAGE_REPEAT_AMOUNT;
     return sum;
 }
