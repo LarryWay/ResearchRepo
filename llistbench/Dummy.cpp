@@ -1,3 +1,12 @@
+/* 
+
+    Dummy object for benchmark_linear.cpp
+    Serves as a blank object with a stall method to exaggerate timings 
+
+*/
+
+#pragma once
+
 #include <thread>
 #include <chrono>
 #include <random>
@@ -23,30 +32,4 @@ struct Dummy{
 
 };
 
-void inject_fragments(){
 
-    std::random_device r;
-    std::default_random_engine dre(r());
-    std::uniform_int_distribution<int> repeat_amount(1, 10);
-    std::uniform_int_distribution<int> malloc_size(1, 20);
-
-    repeat_for(repeat_amount(dre), [&malloc_size, &dre](){
-        malloc(malloc_size(dre));
-    }); 
-
-}
-
-// Boilerplate
-void initialize_dummy(LinkedList<Dummy>& d){
-    std::random_device r;
-    std::default_random_engine dre(r());
-    std::uniform_int_distribution<int> num_dist(INT32_MIN, INT32_MAX);
-    std::uniform_int_distribution<int> letter_dist('a', 'z');
-    const int DUMMY_SIZE = 100'000;
-    for(int x = 0 ; x < DUMMY_SIZE ; x++){
-        inject_fragments();
-        Dummy clone(num_dist(dre), letter_dist(dre));
-        d.push_back(clone);
-        //std::cout << "Created Clone with " << clone.num << "   " << clone.letter << '\n';
-    }
-}

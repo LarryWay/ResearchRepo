@@ -1,3 +1,10 @@
+/*
+
+    utility functions for timing / benchmarking
+
+*/
+
+
 #pragma once
 
 #include <iostream>
@@ -54,7 +61,6 @@ T avg_time_iter(int iterations, std::function<void()> f){
 
     for(int x = 0 ; x < AVERAGE_REPEAT_AMOUNT ; x++){
         sum += time_iter<T>(iterations, f);
-        //std::cout << sum.count() << std::endl;
     }
 
     sum = sum / AVERAGE_REPEAT_AMOUNT;

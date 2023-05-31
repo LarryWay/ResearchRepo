@@ -1,3 +1,5 @@
+#pragma once
+
 #include <iostream>
 #include <memory>
 #include <utility>
@@ -153,6 +155,7 @@ class LinkedList{
         }
         
 
+        // Debug Purposes
         void print_list(){
             
             int count = 1;
